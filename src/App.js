@@ -8,20 +8,31 @@ function App() {
   const personsData = data;
   const [activeSlide, setActiveSlide] = useState(0);
 
+  useEffect(() => {
+    const id = setInterval(() => {
+      switchToNextPerson();
+    }, 5000);
+    return (
+      () => {
+        clearInterval(id);
+      })
+
+  }, [activeSlide])
+
   const switchToPrevPerson = () => {
     const personsDataLength = personsData.length - 1;
 
-    if(activeSlide === 0) {
+    if (activeSlide === 0) {
       setActiveSlide(personsDataLength);
     } else {
       setActiveSlide(activeSlide - 1);
     }
   }
-  
+
   const switchToNextPerson = () => {
     const personsDataLength = personsData.length - 1;
 
-    if(activeSlide < personsDataLength) {
+    if (activeSlide < personsDataLength) {
       setActiveSlide(activeSlide + 1);
     } else {
       setActiveSlide(0);
@@ -39,8 +50,8 @@ function App() {
       <div className='section-center'>
         {personsData.map((person, idx) => {
           const isActive = (idx === activeSlide) ? 'activeSlide' :
-            (idx < activeSlide) ? 'lastSlide' : 
-            (idx > activeSlide) ? 'nextSlide' : '';
+            (idx < activeSlide) ? 'lastSlide' :
+              (idx > activeSlide) ? 'nextSlide' : '';
 
           return (
             <article key={`item${person.id}`} className={isActive}>
