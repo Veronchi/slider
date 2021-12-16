@@ -9,7 +9,13 @@ function App() {
   const [activeSlide, setActiveSlide] = useState(0);
 
   const switchToPrevPerson = () => {
-    console.log(111)
+    const personsDataLength = personsData.length - 1;
+
+    if(activeSlide === 0) {
+      setActiveSlide(personsDataLength);
+    } else {
+      setActiveSlide(activeSlide - 1);
+    }
   }
   
   const switchToNextPerson = () => {
@@ -18,7 +24,7 @@ function App() {
     if(activeSlide < personsDataLength) {
       setActiveSlide(activeSlide + 1);
     } else {
-      setActiveSlide(0)
+      setActiveSlide(0);
     }
   }
 
